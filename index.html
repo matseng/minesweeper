@@ -5,15 +5,23 @@
   <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body ng-controller='MyController'>
+  <div>
+    <button ng-click='newGame()'>New Game</button>
+    <button>Validate</button>
+    <button ng-click='toggleCheat()'>Cheat</button>
+  </div>
+  <br>
   <table>
     <tr ng-repeat='(i, row) in board.board'>
-      <td ng-repeat='(j, tile) in row' ng-click='tileClicked(i,j)'>
-        <span ng-if='tile.mine'>
-          {{tile.mine}}
-        </span>
-        <span ng-if='(tile.adjacentMines !== null) && !(tile.mine)'>
-          {{tile.adjacentMines}}
-        </span>
+      <td ng-repeat='(j, tile) in row' ng-click='tileClicked(i, j, $event)'>
+        <div ng-if='tile.clicked || cheat'>
+          <span ng-if='tile.mine'>
+            {{tile.mine}}
+          </span>
+          <span ng-if='(tile.adjacentMines !== null) && !(tile.mine)'>
+            {{tile.adjacentMines}}
+          </span>
+        </div>
       </td>
     </tr>
   </table>

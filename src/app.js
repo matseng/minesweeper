@@ -8,6 +8,7 @@ angular.module('MyApp')
       this.j = j;
       this.mine = null;
       this.adjacentMines = null;
+      this.clicked = false;
     };
 
     var Board = function(n, numberOfMines) {
@@ -73,12 +74,22 @@ angular.module('MyApp')
 
     };
 
-    $scope.tileClicked = function(i,j) {
+    $scope.tileClicked = function(i,j, $event) {
       var tile = $scope.board.board[i][j];
+      tile.clicked = true;
       console.log(i,j, 'mine:' + tile.mine);
+      console.log($scope, $event);
     };
 
-    (function initialize() {
+    $scope.newGame = function() {
+      initializeNewGame();
+    };
+
+    $scope.toggleCheat = function() {
+      $scope.cheat = !$scope.cheat;
+    };
+    
+    function initializeNewGame() {
       var n = 8;
       var numberOfMines = 10;
       var board = new Board(n, numberOfMines)
@@ -88,6 +99,8 @@ angular.module('MyApp')
       board.countAdjacentMines();
       $scope.board = board;
       console.log($scope.board);
-    })();
+    };
+
+    initializeNewGame();
 
   }]);
