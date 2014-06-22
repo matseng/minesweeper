@@ -16,7 +16,7 @@ angular.module('MyApp')
       this.n = n || 8;
       this.numberOfMines = numberOfMines || 10;
       this.board = [];
-      this.winner = false;  //null, 0, 1
+      this.winner = null;  //null, 0, 1
     };
 
     Board.prototype.initializeBoard = function() {
@@ -133,6 +133,7 @@ angular.module('MyApp')
     Board.prototype.showTile = function(i, j) {
       var tile = this.board[i][j];
       tile.show = true;
+      if(tile.mine) this.winner = false;
       $scope.$apply();
     }
 

@@ -10,13 +10,17 @@
     <button ng-click='newGame()'>New Game</button>
     <button ng-click='validate()'>Validate</button>
     <button ng-click='toggleXRayVision()'>X-ray Vision</button>
+    <div>
+      <br>
+      <div ng-if='board.winner === false'>You lost!</div>
+      <div ng-if='board.winner === true'>You won!</div>
+    </div>
   </div>
   <br>
   <div class='text-center'>
     <table>
       <tr ng-repeat='(i, row) in board.board'>
         <td 
-
           ng-class="{show: tile.show, xray: xrayVision}" 
           ng-repeat='(j, tile) in row' 
           ng-click='clickHandler(i, j, $event)'>
@@ -36,6 +40,13 @@
         </td>
       </tr>
     </table>
+  </div>
+  <br>
+  <div class='text-center'>
+    <div><strong>Instructions: Disarm all the mines!</strong></div>
+    <div>Single click to reveal a tile</div>
+    <div>Double click to disarm a mine</div>
+    <div>Double click again to undo</div>
   </div>
 
 
