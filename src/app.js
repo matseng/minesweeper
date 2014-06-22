@@ -16,7 +16,7 @@ angular.module('MyApp')
       this.n = n || 8;
       this.numberOfMines = numberOfMines || 10;
       this.board = [];
-      this.winner = null;  //null, 0, 1
+      this.winner = null;
     };
 
     Board.prototype.initializeBoard = function() {
@@ -42,7 +42,6 @@ angular.module('MyApp')
           j = getRandomIndex();
         }
         this.board[i][j].mine = true;
-        console.log(i,j,this.board[i][j].mine);
       }
 
       function getRandomIndex() {
@@ -61,13 +60,11 @@ angular.module('MyApp')
           mineCleared = isMineCleared(this.board[i][j]);
           if(mineCleared === false) {
             this.winner = false;
-            console.log(this.winner);
             return;
           }
         }
       }
       this.winner = true;
-      console.log(this.winner);
 
       function isMineCleared(tile) {
         if(tile.mine && tile.disarm)
@@ -101,8 +98,34 @@ angular.module('MyApp')
         }
         this.board[x][y].adjacentMines = count;
       };
-
     };
+
+    Board.prototype.showTile = function(i, j) {
+      var tile = this.board[i][j];
+      tile.show = true;
+      if(tile.mine) this.winner = false;
+      $scope.$apply();
+    }
+
+    Board.prototype.disarmMine = function(i, j) {
+      var tile = this.board[i][j];
+      tile.disarm = !tile.disarm;
+    };
+
+    $scope.toggleXRayVision = function() {
+      $scope.xrayVision = !$scope.xrayVision;
+    };
+    
+    (function initializeParameters() {
+      $scope.boardSizes = [{n:8}, {n:10}, {n:12}, {n:16}];
+      $scope.select = {};
+      $scope.select.boardSize = $scope.boardSizes[0];
+      $scope.numberOfMines = [{text:'easy', num:10}, {text:'medium', num:20}, {text:'hard', num:30}];
+      $scope.select.numberOfMines = $scope.numberOfMines[0];
+      $scope.selectionChanged = function() {
+        $scope.select.changed = true;
+      };
+    })();
 
     (function initializeClickHandler() {
       var numOfClicks = 0;
@@ -130,42 +153,18 @@ angular.module('MyApp')
       };
     })();
 
-    Board.prototype.showTile = function(i, j) {
-      var tile = this.board[i][j];
-      tile.show = true;
-      if(tile.mine) this.winner = false;
-      $scope.$apply();
-    }
-
-    Board.prototype.disarmMine = function(i, j) {
-      var tile = this.board[i][j];
-      // console.log(tile.disarm);
-      tile.disarm = !tile.disarm;
-      // console.log(tile.disarm);
-      // $scope.$apply();
-    };
-
     $scope.newGame = function() {
-      initializeNewGame();
-    };
-
-    $scope.toggleXRayVision = function() {
-      $scope.xrayVision = !$scope.xrayVision;
-      console.log($scope.xrayVision);
-    };
-    
-    function initializeNewGame() {
-      var n = 8;
-      var numberOfMines = 10;
+      var n = $scope.select.boardSize.n;
+      var numberOfMines = $scope.select.numberOfMines.num;
       var board = new Board(n, numberOfMines)
       board.initializeBoard();
       board.addMines(numberOfMines)
       board.countAdjacentMines();
       $scope.board = board;
-      console.log($scope.board);
       $scope.xrayVision = false;
+      $scope.select.changed = false;
     };
 
-    initializeNewGame();
+    $scope.newGame();
 
   }]);

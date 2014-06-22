@@ -38,10 +38,12 @@ td {
   color: red;
   width: 39px;
   height: 39px;
+  /*VERTICAL CENTERING DOES NOT WORK WITH PERCENTAGES:*/
   /*width: 100%;
   height: 100%;*/
   background: rgba(0, 0, 0, 0.3);
   display: table-cell;
   vertical-align:middle;
   text-align: center;
+  font-size: 1.5em;
 }

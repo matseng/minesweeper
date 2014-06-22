@@ -7,13 +7,29 @@
 <body ng-controller='MyController'>
   <div class='text-center'>
     <h1>Minesweeper</h1>
-    <button ng-click='newGame()'>New Game</button>
-    <button ng-click='validate()'>Validate</button>
-    <button ng-click='toggleXRayVision()'>X-ray Vision</button>
+    <div>
+      <button ng-click='newGame()'>New Game</button>
+      <button ng-click='validate()'>Validate &#x263a;</button>
+      <button ng-click='toggleXRayVision()'>X-ray Vision</button>
+    </div>
+    <br>
+    <div>
+      <span>Board Size:</span>
+      <select ng-model="select.boardSize" 
+        ng-options="num.n for num in boardSizes"
+        ng-change='selectionChanged()'>
+      </select>
+      <span>&nbsp Difficulty:</span>
+      <select ng-model="select.numberOfMines" 
+        ng-options="mines.text for mines in numberOfMines"
+        ng-change='selectionChanged()'>
+      </select>
+      <span ng-if='select.changed'>(Click New Game)</span>
+    </div>
     <div>
       <br>
-      <div ng-if='board.winner === false'>You lost!</div>
-      <div ng-if='board.winner === true'>You won!</div>
+      <h4 ng-if='board.winner === false'>You lost!</h4>
+      <h4 ng-if='board.winner === true'>You won!</h4>
     </div>
   </div>
   <br>
@@ -44,9 +60,9 @@
   <br>
   <div class='text-center'>
     <div><strong>Instructions: Disarm all the mines!</strong></div>
-    <div>Single click to reveal a tile</div>
-    <div>Double click to disarm a mine</div>
-    <div>Double click again to undo</div>
+    <div>1-click to reveal a tile</div>
+    <div>2-click to disarm a mine</div>
+    <div>2-click again to undo</div>
   </div>
 
 
