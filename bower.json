@@ -1,0 +1,21 @@
+{
+  "name": "__MyApp",
+  "version": "0.0.1",
+  "homepage": "http://matseng.github.io/__MyApp/",
+  "authors": [
+    "Michael Tseng <matseng@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.16",
+    "bootstrap": "~3.1.1"
+  }
+}

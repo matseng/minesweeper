@@ -1,0 +1,26 @@
+<html ng-app='MyApp'>
+<head>
+  <title>MyApp</title>
+  <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+<body ng-controller='MyController'>
+  <table>
+    <tr ng-repeat='(i, row) in board.board'>
+      <td ng-repeat='(j, tile) in row' ng-click='tileClicked(i,j)'>
+        <span ng-if='tile.mine'>
+          {{tile.mine}}
+        </span>
+        <span ng-if='(tile.adjacentMines !== null) && !(tile.mine)'>
+          {{tile.adjacentMines}}
+        </span>
+      </td>
+    </tr>
+  </table>
+
+
+  <script src='bower_components/angular/angular.js'></script>
+  <!-- <script src='bower_components/angular-animate/angular-animate.js'></script> -->
+  <script src='src/app.js'></script>
+</body>
+</html>
