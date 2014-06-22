@@ -49,9 +49,6 @@ angular.module('MyApp')
       };
     };
 
-    $scope.validate = function() {
-      $scope.board.validate();
-    };
 
     Board.prototype.validate = function() {
       var mineCleared;
@@ -112,22 +109,32 @@ angular.module('MyApp')
       tile.disarm = !tile.disarm;
     };
 
-    $scope.toggleXRayVision = function() {
-      $scope.xrayVision = !$scope.xrayVision;
-    };
     
-    (function initializeParameters() {
+    (function initializeScopeParameters() {
       $scope.boardSizes = [{n:8}, {n:10}, {n:12}, {n:16}];
       $scope.select = {};
       $scope.select.boardSize = $scope.boardSizes[0];
       $scope.numberOfMines = [{text:'easy', num:10}, {text:'medium', num:20}, {text:'hard', num:30}];
       $scope.select.numberOfMines = $scope.numberOfMines[0];
+      
       $scope.selectionChanged = function() {
         $scope.select.changed = true;
       };
+
+      $scope.validate = function() {
+        $scope.board.validate();
+      };
+
+      $scope.toggleXRayVision = function() {
+        $scope.xrayVision = !$scope.xrayVision;
+      };
+
+      $scope.newGame = function() {
+        newGame();
+      }
     })();
 
-    (function initializeClickHandler() {
+    (function initializeBoardClickHandler() {
       var numOfClicks = 0;
       $scope.clickHandler = function(i, j, $event) {
         numOfClicks += 1;
@@ -153,7 +160,7 @@ angular.module('MyApp')
       };
     })();
 
-    $scope.newGame = function() {
+    var newGame = function() {
       var n = $scope.select.boardSize.n;
       var numberOfMines = $scope.select.numberOfMines.num;
       var board = new Board(n, numberOfMines)
@@ -165,6 +172,6 @@ angular.module('MyApp')
       $scope.select.changed = false;
     };
 
-    $scope.newGame();
+    newGame();
 
   }]);
