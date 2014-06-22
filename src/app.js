@@ -85,8 +85,9 @@ angular.module('MyApp')
       initializeNewGame();
     };
 
-    $scope.toggleCheat = function() {
-      $scope.cheat = !$scope.cheat;
+    $scope.toggleXRayVision = function() {
+      $scope.xrayVision = !$scope.xrayVision;
+      console.log($scope.xrayVision);
     };
     
     function initializeNewGame() {

@@ -8,13 +8,13 @@
   <div>
     <button ng-click='newGame()'>New Game</button>
     <button>Validate</button>
-    <button ng-click='toggleCheat()'>Cheat</button>
+    <button ng-click='toggleXRayVision()'>X-ray Vision</button>
   </div>
   <br>
   <table>
     <tr ng-repeat='(i, row) in board.board'>
-      <td ng-repeat='(j, tile) in row' ng-click='tileClicked(i, j, $event)'>
-        <div ng-if='tile.clicked || cheat'>
+      <td ng-class="{xray: xrayVision}" ng-repeat='(j, tile) in row' ng-click='tileClicked(i, j, $event)'>
+        <div ng-if='tile.clicked || xrayVision'>
           <span ng-if='tile.mine'>
             {{tile.mine}}
           </span>

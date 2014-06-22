@@ -9,3 +9,9 @@ td {
   height: 40px;
   text-align: center;
 }
+
+.xray {
+  background-color: black;
+  color: white;
+  border-color: white;
+}
