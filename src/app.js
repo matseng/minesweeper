@@ -16,6 +16,7 @@ angular.module('MyApp')
       this.n = n || 8;
       this.numberOfMines = numberOfMines || 10;
       this.board = [];
+      this.winner = false;  //null, 0, 1
     };
 
     Board.prototype.initializeBoard = function() {
@@ -46,6 +47,34 @@ angular.module('MyApp')
 
       function getRandomIndex() {
         return index = Math.floor(Math.random() * (n));
+      };
+    };
+
+    $scope.validate = function() {
+      $scope.board.validate();
+    };
+
+    Board.prototype.validate = function() {
+      var mineCleared;
+      for(var i = 0; i < this.n; i++) {
+        for(var j = 0; j < this.n; j++) {
+          mineCleared = isMineCleared(this.board[i][j]);
+          if(mineCleared === false) {
+            this.winner = false;
+            console.log(this.winner);
+            return;
+          }
+        }
+      }
+      this.winner = true;
+      console.log(this.winner);
+
+      function isMineCleared(tile) {
+        if(tile.mine && tile.disarm)
+          return true;
+        if(!tile.mine && !tile.disarm)
+          return true;
+        return false;
       };
     };
 
@@ -92,12 +121,10 @@ angular.module('MyApp')
         }, 300);
 
         function singleClick() {
-          console.log('singleClick');
           $scope.board.showTile(i,j);
         };
         
         function doubleClick() {
-          console.log('doubleClick');
           $scope.board.disarmMine(i,j);
         };
       };
@@ -111,7 +138,9 @@ angular.module('MyApp')
 
     Board.prototype.disarmMine = function(i, j) {
       var tile = this.board[i][j];
-      tile.disarm = true;
+      // console.log(tile.disarm);
+      tile.disarm = !tile.disarm;
+      // console.log(tile.disarm);
       // $scope.$apply();
     };
 
@@ -129,7 +158,6 @@ angular.module('MyApp')
       var numberOfMines = 10;
       var board = new Board(n, numberOfMines)
       board.initializeBoard();
-      console.log(board);
       board.addMines(numberOfMines)
       board.countAdjacentMines();
       $scope.board = board;

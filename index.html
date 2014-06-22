@@ -5,35 +5,38 @@
   <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body ng-controller='MyController'>
-  <div>
+  <div class='text-center'>
+    <h1>Minesweeper</h1>
     <button ng-click='newGame()'>New Game</button>
-    <button>Validate</button>
+    <button ng-click='validate()'>Validate</button>
     <button ng-click='toggleXRayVision()'>X-ray Vision</button>
   </div>
   <br>
-  <table>
-    <tr ng-repeat='(i, row) in board.board'>
-      <td 
+  <div class='text-center'>
+    <table>
+      <tr ng-repeat='(i, row) in board.board'>
+        <td 
 
-        ng-class="{show: tile.show, xray: xrayVision}" 
-        ng-repeat='(j, tile) in row' 
-        ng-click='clickHandler(i, j, $event)'>
-        <div ng-if='tile.show || xrayVision'>
-          <span ng-if='tile.mine'>
-            <img class='mine-img' ng-src="./img/120px-MacBomb.svg.png">
-          </span>
-          <span ng-if='(tile.adjacentMines !== null) && !(tile.mine)'>
-            {{tile.adjacentMines}}
-          </span>
-        </div>
-        <div class='disarm-outer' ng-if='tile.disarm'>
-          <div class='disarm-inner'>
-            <span>X</span>
+          ng-class="{show: tile.show, xray: xrayVision}" 
+          ng-repeat='(j, tile) in row' 
+          ng-click='clickHandler(i, j, $event)'>
+          <div ng-if='tile.show || xrayVision'>
+            <span ng-if='tile.mine'>
+              <img class='mine-img' ng-src="./img/120px-MacBomb.svg.png">
+            </span>
+            <span ng-if='(tile.adjacentMines !== null) && !(tile.mine)'>
+              {{tile.adjacentMines}}
+            </span>
           </div>
-        </div>
-      </td>
-    </tr>
-  </table>
+          <div class='disarm-outer' ng-if='tile.disarm'>
+            <div class='disarm-inner'>
+              <span>X</span>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
 
 
   <script src='bower_components/angular/angular.js'></script>
