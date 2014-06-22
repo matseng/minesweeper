@@ -16,7 +16,7 @@
       <td ng-class="{xray: xrayVision}" ng-repeat='(j, tile) in row' ng-click='tileClicked(i, j, $event)'>
         <div ng-if='tile.clicked || xrayVision'>
           <span ng-if='tile.mine'>
-            {{tile.mine}}
+            <img class='mine-img' ng-src="./img/120px-MacBomb.svg.png">
           </span>
           <span ng-if='(tile.adjacentMines !== null) && !(tile.mine)'>
             {{tile.adjacentMines}}
