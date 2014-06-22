@@ -8,7 +8,8 @@ angular.module('MyApp')
       this.j = j;
       this.mine = null;
       this.adjacentMines = null;
-      this.clicked = false;
+      this.show = false;
+      this.disarm = false;
     };
 
     var Board = function(n, numberOfMines) {
@@ -74,11 +75,44 @@ angular.module('MyApp')
 
     };
 
-    $scope.tileClicked = function(i,j, $event) {
-      var tile = $scope.board.board[i][j];
-      tile.clicked = true;
-      console.log(i,j, 'mine:' + tile.mine);
-      console.log($scope, $event);
+    (function initializeClickHandler() {
+      var numOfClicks = 0;
+      $scope.clickHandler = function(i, j, $event) {
+        numOfClicks += 1;
+        if(numOfClicks === 2) {
+          doubleClick(i, j);
+          numOfClicks = 0;
+        } 
+        
+        setTimeout(function(){
+          if(numOfClicks === 1) {
+            singleClick(i, j);
+            numOfClicks = 0;
+          }
+        }, 300);
+
+        function singleClick() {
+          console.log('singleClick');
+          $scope.board.showTile(i,j);
+        };
+        
+        function doubleClick() {
+          console.log('doubleClick');
+          $scope.board.disarmMine(i,j);
+        };
+      };
+    })();
+
+    Board.prototype.showTile = function(i, j) {
+      var tile = this.board[i][j];
+      tile.show = true;
+      $scope.$apply();
+    }
+
+    Board.prototype.disarmMine = function(i, j) {
+      var tile = this.board[i][j];
+      tile.disarm = true;
+      // $scope.$apply();
     };
 
     $scope.newGame = function() {
@@ -100,6 +134,7 @@ angular.module('MyApp')
       board.countAdjacentMines();
       $scope.board = board;
       console.log($scope.board);
+      $scope.xrayVision = false;
     };
 
     initializeNewGame();
