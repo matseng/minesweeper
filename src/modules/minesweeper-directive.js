@@ -1,14 +1,11 @@
-// minesweeper.js
-angular.module('minesweeper', []);
-
+// minesweeper-directive.js
 angular.module('minesweeper')
-  .directive('minesweeperDirective', [function() {
+  .directive('minesweeper', [function() {
     return {
       restrict: 'E',
-      controller: 'MyController',
+      controller: 'minesweeper-controller',
       templateUrl: './src/modules/main.html',
       // scope: {selection: '='}
-      // controller: function($scope, $element){},
       link: link
     };
 
