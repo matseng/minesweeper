@@ -1,1 +1,1 @@
-angular.module('MyApp', ['minesweeper']);
+angular.module('MinesweeperApp', ['minesweeper']);
