@@ -5,69 +5,10 @@
   <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body ng-controller='MyController'>
-  <div class='text-center'>
-    <h1>Minesweeper</h1>
-    <div>
-      <button ng-click='newGame()'>New Game</button>
-      <button ng-click='validate()'>Validate &#x263a;</button>
-      <button ng-click='toggleXRayVision()'>X-ray Vision</button>
-    </div>
-    <br>
-    <div>
-      <span>Board Size:</span>
-      <select ng-model="select.boardSize" 
-        ng-options="num.n for num in boardSizes"
-        ng-change='selectionChanged()'>
-      </select>
-      <span>&nbsp Difficulty:</span>
-      <select ng-model="select.numberOfMines" 
-        ng-options="mines.text for mines in numberOfMines"
-        ng-change='selectionChanged()'>
-      </select>
-      <span ng-if='select.changed'>(Click New Game)</span>
-    </div>
-    <div>
-      <br>
-      <h4 ng-if='board.winner === false'>You lost!</h4>
-      <h4 ng-if='board.winner === true'>You won!</h4>
-    </div>
-  </div>
-  <br>
-  <div class='text-center'>
-    <table>
-      <tr ng-repeat='(i, row) in board.board'>
-        <td 
-          ng-class="{show: tile.show, xray: xrayVision}" 
-          ng-repeat='(j, tile) in row' 
-          ng-click='clickHandler(i, j, $event)'>
-          <div ng-if='tile.show || xrayVision'>
-            <span ng-if='tile.mine'>
-              <img class='mine-img' ng-src="./img/120px-MacBomb.svg.png">
-            </span>
-            <span ng-if='(tile.adjacentMines !== null) && !(tile.mine)'>
-              {{tile.adjacentMines}}
-            </span>
-          </div>
-          <div class='disarm-outer' ng-if='tile.disarm'>
-            <div class='disarm-inner'>
-              <span>X</span>
-            </div>
-          </div>
-        </td>
-      </tr>
-    </table>
-  </div>
-  <br>
-  <div class='text-center'>
-    <div><strong>Instructions: Disarm all the mines!</strong></div>
-    <div>1-click to reveal a tile</div>
-    <div>2-click to disarm a mine</div>
-    <div>2-click again to undo</div>
-  </div>
-
-
+  <minesweeper-directive></minesweeper-directive>
   <script src='bower_components/angular/angular.js'></script>
   <!-- <script src='bower_components/angular-animate/angular-animate.js'></script> -->
   <script src='src/app.js'></script>
+  <script src='src/modules/minesweeper.js'></script>
 </body>
 </html>

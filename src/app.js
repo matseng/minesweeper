@@ -1,4 +1,4 @@
-angular.module('MyApp', []);
+angular.module('MyApp', ['minesweeper']);
 
 angular.module('MyApp')
   .controller('MyController', ['$scope', function($scope) {
