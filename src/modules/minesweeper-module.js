@@ -1,2 +1,2 @@
-// minesweeper.js
+// minesweeper-module.js
 angular.module('minesweeper', []);

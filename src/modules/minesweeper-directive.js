@@ -5,11 +5,6 @@ angular.module('minesweeper')
       restrict: 'E',
       controller: 'minesweeper-controller',
       templateUrl: './src/modules/main.html',
-      // scope: {selection: '='}
-      link: link
+      scope: {}
     };
-
-    function link($scope, element, attrs) {
-      console.log("hello world");
-    }
   }]);
