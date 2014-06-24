@@ -1,6 +1,6 @@
 README.md
 
-# PreviouslyDeployed at http://matseng.github.io/minesweeper
+# Previously deployed at http://matseng.github.io/minesweeper
 
 # matseng: To get set up for a new project, from the command line run:
   #  $ cp -r angularBootstrapTemplate myNewProjectName
