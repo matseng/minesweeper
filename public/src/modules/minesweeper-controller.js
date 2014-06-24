@@ -72,7 +72,7 @@ angular.module('minesweeper')
     };
     newGame();
 
-    minesweeper_factory.get()
+    minesweeper_factory.get('pastMiddleware')
       .success(function(data, status){
         console.log(data, status);
       });

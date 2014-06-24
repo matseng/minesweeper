@@ -3,8 +3,9 @@ angular.module('minesweeper')
   .factory('minesweeper_factory', ['$http', function($http){
     return {
 
-      get: function(){
-        return $http.get('http://localhost:3000/');
+      get: function(myRoute){
+        myRoute = myRoute || "";
+        return $http.get('http://localhost:3000/' + myRoute);
       },
 
       post: function(board){
