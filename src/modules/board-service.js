@@ -84,6 +84,7 @@ angular.module('minesweeper')
         count = 0;
         for(var i = x - 1; i <= x + 1; i++) {
           for(var j = y - 1; j <= y + 1; j++) {
+            // TODO: isInBounds method:
             if(i >= 0 && j >= 0 && i < this.n && j < this.n) {
               tile = this.board[i][j];
               if(tile.mine === true) {

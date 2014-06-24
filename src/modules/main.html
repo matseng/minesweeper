@@ -28,8 +28,10 @@
   </div>
   <br>
   <div class='board-container text-center'>
+    <!-- TODO: Refactor as template -->
     <table>
       <tr ng-repeat='(i, row) in board.board'>
+        <!-- TODO: refactor as tile element or directive-->
         <td 
           ng-class="{show: tile.show, xray: xrayVision}" 
           ng-repeat='(j, tile) in row' 

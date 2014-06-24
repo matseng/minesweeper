@@ -1,6 +1,7 @@
 // minesweeper-controller.js
 angular.module('minesweeper')
-  .controller('minesweeper-controller', ['$scope', 'boardService', function($scope, boardService) {
+  .controller('minesweeper-controller', 
+    ['$scope', 'boardService', 'minesweeper_factory', function($scope, boardService, minesweeper_factory) {
     
     (function initializeScopeParameters() {
       $scope.boardSizes = [{n:8}, {n:10}, {n:12}, {n:16}];
@@ -35,6 +36,7 @@ angular.module('minesweeper')
           numOfClicks = 0;
         } 
         
+        // TODO: use Angular's $timeout
         setTimeout(function(){
           if(numOfClicks === 1) {
             singleClick(i, j);
@@ -44,7 +46,11 @@ angular.module('minesweeper')
 
         function singleClick() {
           $scope.board.showTile(i,j);
-          $scope.$apply();
+          $scope.$digest();
+          //Alternatively, $apply will do a try/catch, see docs!
+          // $scope.$apply(function() {
+          //   $scope.board.showTile(i,j);
+          // });
         };
         
         function doubleClick() {
@@ -64,7 +70,11 @@ angular.module('minesweeper')
       $scope.xrayVision = false;
       $scope.select.changed = false;
     };
-
     newGame();
+
+    minesweeper_factory.get()
+      .success(function(data, status){
+        console.log(data, status);
+      });
 
   }]);
