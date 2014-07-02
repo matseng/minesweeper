@@ -40,7 +40,7 @@ angular.module('minesweeper')
             singleClick(i, j);
             numOfClicks = 0;
           }
-        }, 300);
+        }, 200);
 
         function singleClick() {
           $scope.board.tileClicked(i,j);
