@@ -43,7 +43,7 @@ angular.module('minesweeper')
         }, 300);
 
         function singleClick() {
-          $scope.board.showTile(i,j);
+          $scope.board.tileClicked(i,j);
           $scope.$apply();
         };
         

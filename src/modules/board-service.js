@@ -107,6 +107,29 @@ angular.module('minesweeper')
       tile.disarm = !tile.disarm;
     };
 
+    Board.prototype.tileClicked = function(i, j) {
+      var tile = this.board[i][j];
+      if(tile.show === false) {
+        this.showTile(i, j);
+        if(tile.adjacentMines === 0) {
+          this.forEachAdjacentTile(i, j, Board.prototype.tileClicked.bind(this));
+        }
+      }
+    };
+
+    Board.prototype.forEachAdjacentTile = function(x, y, cb) {
+      for(var i = x - 1; i <= x + 1; i++) {
+        for(var j = y - 1; j <= y + 1; j++) {
+          if( inBounds.call(this, i, j) ) {
+            cb(i, j);
+          }
+        }
+      }
+      function inBounds(i, j) {
+        return (i >= 0 && j >= 0 && i < this.n && j < this.n);
+      }
+    };
+
     return Board;
 
   }]);
