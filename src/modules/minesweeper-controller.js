@@ -58,8 +58,8 @@ angular.module('minesweeper')
       var numberOfMines = $scope.select.numberOfMines.num;
       var board = new boardService(n, numberOfMines);
       board.initializeBoard();
-      board.addMines(numberOfMines)
-      board.countAdjacentMines();
+      // board.addMines(numberOfMines)
+      // board.countAdjacentMines();
       $scope.board = board;
       $scope.xrayVision = false;
       $scope.select.changed = false;
