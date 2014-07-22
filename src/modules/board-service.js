@@ -13,8 +13,8 @@ angular.module('minesweeper')
 
     var Board = function(n, numberOfMines) {
       this.n = n || 8;
-      // this.numberOfMines = numberOfMines || 10;
-      this.numberOfMines = 63;
+      this.numberOfMines = numberOfMines || 10;
+      // this.numberOfMines = 63;
       this.board = [];
       this.winner = null;
     };
